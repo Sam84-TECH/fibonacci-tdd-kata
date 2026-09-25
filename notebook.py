@@ -65,5 +65,25 @@ def _(n_input):
     return
 
 
+@app.function
+def test_fibonacci_large_n():
+    assert fibonacci(10000000) >= 0
+
+
+@app.function
+def fibonacci_fast(n):
+    def fib_pair(k):
+        if k == 0:
+            return (0, 1)
+        a, b = fib_pair(k // 2)
+        c = a * (2 * b - a)
+        d = a * a + b * b
+        if k % 2 == 0:
+            return (c, d)
+        else:
+            return (d, c + d)
+    return fib_pair(n)[0]
+
+
 if __name__ == "__main__":
     app.run()
