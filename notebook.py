@@ -11,11 +11,6 @@ def _():
     return
 
 
-@app.function
-def fibonacci(n):
-    pass
-
-
 @app.cell
 def _():
     def test_fibonacci_base_cases():
@@ -27,6 +22,16 @@ def _():
         assert fibonacci(10) == 55
 
     return
+
+
+@app.function
+def fibonacci(n):
+    if n == 0:
+        return (0)
+    if n == 1:
+        return(1)
+    if n >= 2:
+        return (fibonacci(n-1) + fibonacci(n-2))
 
 
 if __name__ == "__main__":
