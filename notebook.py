@@ -26,12 +26,14 @@ def _():
 
 @app.function
 def fibonacci(n):
-    if n == 0:
-        return (0)
-    if n == 1:
-        return(1)
-    if n >= 2:
-        return (fibonacci(n-1) + fibonacci(n-2))
+    a = 0
+    b = 1
+    for i in range (n):
+        last_a = a
+        a = b
+        b= last_a+b
+        
+    return (a)
 
 
 if __name__ == "__main__":
