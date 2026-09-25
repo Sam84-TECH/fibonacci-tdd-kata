@@ -8,7 +8,7 @@ app = marimo.App(width="medium")
 def _():
     import marimo as mo
 
-    return
+    return (mo,)
 
 
 @app.cell
@@ -24,6 +24,14 @@ def _():
     return
 
 
+@app.cell
+def _(mo):
+    mo.md("""
+    this fonction calcultate the n number of fibonacci
+    """)
+    return
+
+
 @app.function
 def fibonacci(n):
     a = 0
@@ -34,6 +42,27 @@ def fibonacci(n):
         b= last_a+b
         
     return (a)
+
+
+@app.cell
+def _(mo):
+    n_input = mo.ui.number(start=0, stop=1000, value=10, label="n")
+    n_input
+    return (n_input,)
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+ 
+    """)
+    return
+
+
+@app.cell
+def _(n_input):
+    fibonacci(n_input.value)
+    return
 
 
 if __name__ == "__main__":
