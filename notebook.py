@@ -92,24 +92,33 @@ def test_fibonacci_large_n():
     assert fibonacci_fast(10_000_000) >= 0
 
 
-@app.cell
-def _(fibonacci_mod):
-    def test_fibonacci_mod_small_n():
-        m = 1_000_000_000
-        assert fibonacci_mod(10, m) == 55
-        assert fibonacci_mod(20, m) == 6765
-
-    return
+@app.function
+def test_fibonacci_mod_small_n():
+    m = 1_000_000_000
+    assert fibonacci_mod(10, m) == 55
+    assert fibonacci_mod(20, m) == 6765
 
 
-@app.cell
-def _(fibonacci_mod):
-    def test_fibonacci_mod_huge_n():
-        m = 1_000_000_000
-        result = fibonacci_mod(10**18, m)
-        assert 0 <= result < m
+@app.function
+def test_fibonacci_mod_huge_n():
+    m = 1_000_000_000
+    result = fibonacci_mod(10**18, m)
+    assert 0 <= result < m
 
-    return
+
+@app.function
+def fibonacci_mod(n, m):
+    def fib_pair_mod(k):
+        if k == 0:
+            return (0 % m, 1 % m)
+        a, b = fib_pair_mod(k // 2)
+        c = (a * ((2 * b - a) % m)) % m
+        d = (a * a + b * b) % m
+        if k % 2 == 0:
+            return (c, d)
+        else:
+            return (d, (c + d) % m)
+    return fib_pair_mod(n)[0]
 
 
 if __name__ == "__main__":
