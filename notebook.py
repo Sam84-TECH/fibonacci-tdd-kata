@@ -93,7 +93,22 @@ def test_fibonacci_large_n():
 
 
 @app.cell
-def _():
+def _(fibonacci_mod):
+    def test_fibonacci_mod_small_n():
+        m = 1_000_000_000
+        assert fibonacci_mod(10, m) == 55
+        assert fibonacci_mod(20, m) == 6765
+
+    return
+
+
+@app.cell
+def _(fibonacci_mod):
+    def test_fibonacci_mod_huge_n():
+        m = 1_000_000_000
+        result = fibonacci_mod(10**18, m)
+        assert 0 <= result < m
+
     return
 
 
