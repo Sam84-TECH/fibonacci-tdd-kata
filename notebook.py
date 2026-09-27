@@ -65,9 +65,11 @@ def _(n_input):
     return
 
 
-@app.function
-def test_fibonacci_large_n():
-    assert fibonacci(10000000) >= 0
+@app.cell
+def _():
+    "def test_fibonacci_large_n():"
+    "assert fibonacci(10000000) >= 0"
+    return
 
 
 @app.function
@@ -83,6 +85,16 @@ def fibonacci_fast(n):
         else:
             return (d, c + d)
     return fib_pair(n)[0]
+
+
+@app.function
+def test_fibonacci_large_n():
+    assert fibonacci_fast(10_000_000) >= 0
+
+
+@app.cell
+def _():
+    return
 
 
 if __name__ == "__main__":
