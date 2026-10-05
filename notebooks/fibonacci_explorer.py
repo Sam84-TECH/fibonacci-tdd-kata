@@ -3,6 +3,7 @@
 # dependencies = [
 #     "marimo",
 #     "matplotlib",
+#     "fibonacci-kata-sam84",
 # ]
 # ///
 
