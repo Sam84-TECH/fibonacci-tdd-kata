@@ -1,5 +1,6 @@
-from fibonacci_kata.core import fibonacci
 import pytest
+
+from fibonacci_kata.core import fibonacci
 
 
 def test_fibonacci_10():
