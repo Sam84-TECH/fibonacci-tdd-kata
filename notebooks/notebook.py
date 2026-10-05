@@ -36,12 +36,12 @@ def _(mo):
 def fibonacci(n):
     a = 0
     b = 1
-    for i in range (n):
+    for _ in range(n):
         last_a = a
         a = b
-        b= last_a+b
-        
-    return (a)
+        b = last_a + b
+
+    return a
 
 
 @app.cell
@@ -84,6 +84,7 @@ def fibonacci_fast(n):
             return (c, d)
         else:
             return (d, c + d)
+
     return fib_pair(n)[0]
 
 
@@ -118,6 +119,7 @@ def fibonacci_mod(n, m):
             return (c, d)
         else:
             return (d, (c + d) % m)
+
     return fib_pair_mod(n)[0]
 
 
