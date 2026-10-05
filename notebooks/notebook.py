@@ -121,5 +121,105 @@ def fibonacci_mod(n, m):
     return fib_pair_mod(n)[0]
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    if (Test-Path src\fizzbuzz_tdd_kata) {Rename-Item src\fizzbuzz_tdd_kata fizzbuzz_kata} elseif (-not (Test-Path src\fizzbuzz_kata)) {mkdir src\fizzbuzz_kata}
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    @'
+    "\"\"FizzBuzz kata package - see core.py for the implementation."\"\"
+
+    from fizzbuzz_kata.core import fizzbuzz
+
+    __all__ = ["fizzbuzz"]
+    __version__ = "0.1.0"
+    '@ | Set-Content src\fizzbuzz_kata\__init__.py
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    @'
+    def fizzbuzz(n: int)-> str:
+        if not isinstance(n,int) or n<=0:
+            raise ValueError("fizzbuzz excepts a striclty positive integer")
+        result = "\"
+        if n % 3 == 0:
+            return +="Fizz"
+        if n % 5 == 0:
+            return +="Buzz"
+        return result or str(n)
+        '@ | Set-Content src\fizzbuzz_kata\core.py
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    mkdir tests
+    @'
+    import pytest
+
+    from fizzbuzz_kata.core import fizzbuzz
+
+    @pytest.mark.parametrize(
+        ("n", "excepted")
+        [
+        (1,"1")
+        (2,"2")
+        (3,"Fizz")
+        (5,"Buzz")
+        (6,"Fizz")
+        (10,"Buzz")
+        (15,"FizzBuzz")
+        (30,"FizzBuzz")
+        (100,"Buzz")
+        ]
+    )
+    def test_cases(n, excepted):
+        assert fizzbuzz(n) == excepted
+
+    @pytest.mark.parametrize("invalid"[0, -3, -5, "3"])
+    def test_fizzbuz_rejects_invalid_input(invalid):
+        with pytest.raises(ValueError):
+            fizzbuzz(invalid)
+    '@ | set-Content tests\test_core.py
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    @'
+    [tool.pytest.ini_options]
+    pythonpath = ["src"]
+    testpaths = ["tests"]
+    '@ | Add-Content pyproject.html uv run pytest-v
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    @'
+    [project]
+    name = "fizzbuzz_kata"
+    version = "0.1.0"
+    description = "A TDD Kata"
+    """)
+    return
+
+
 if __name__ == "__main__":
     app.run()
