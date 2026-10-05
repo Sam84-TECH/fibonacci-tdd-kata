@@ -8,6 +8,9 @@ license = { text = "MIT" }
 authors = [{ name = "sam84-TECH", email = "samaaashley.kouyele@centrale-casablanca.ma" }
 ]
 
+[project.scripts]
+fibonacci-kata = "fibonacci_kata.cli:main"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
