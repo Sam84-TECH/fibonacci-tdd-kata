@@ -42,7 +42,7 @@ jobs:
           path: site
 
   deploy:
-    needs: build
+    needs: buildgit switch -c deploy-workflow
     runs-on: ubuntu-latest
     environment:
       name: github-pages
