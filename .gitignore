@@ -12,3 +12,5 @@ __marimo__/
 dist/
 .coverage
 site/
+
+site/
