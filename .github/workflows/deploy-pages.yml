@@ -1,4 +1,4 @@
-name: Deploy notebook to GitHub Pages
+﻿name: Deploy notebook to GitHub Pages
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
           path: site
 
   deploy:
-    needs: buildgit switch -c deploy-workflow
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
